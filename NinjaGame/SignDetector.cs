@@ -29,6 +29,9 @@ namespace NinjaGame
               "Frame id: {0}, timestamp: {1}, hands: {2}",
               frame.Id, frame.Timestamp, frame.Hands.Count
             );
+
+            MasterHand.Instance.Hands = frame.Hands;
+           
             foreach (Hand hand in frame.Hands)
             {
                 //Console.WriteLine("  Hand id: {0}, palm position: {1}, fingers: {2}",
@@ -44,6 +47,19 @@ namespace NinjaGame
                 //  normal.Roll * 180.0f / (float)Math.PI,
                 //  direction.Yaw * 180.0f / (float)Math.PI
                 //);
+
+                MasterHand.Instance.Hand = hand;
+                Finger[] fingers = MasterHand.Instance.Hand.Fingers.ToArray();
+                Finger thumb = fingers[0];
+                Finger index = fingers[1];
+                Finger middle = fingers[2];
+                Finger ring = fingers[3];
+                Finger pinky = fingers[4];
+                MasterHand.Instance.IsThumbExtended = thumb.IsExtended;
+                MasterHand.Instance.IsIndexExtended = index.IsExtended;
+                MasterHand.Instance.IsMiddleExtended = middle.IsExtended;
+                MasterHand.Instance.IsRingExtended = ring.IsExtended;
+                MasterHand.Instance.IsPinkyExtended = pinky.IsExtended;
 
                 float num = 0;
                 foreach(Finger finger in hand.Fingers)
